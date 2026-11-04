@@ -179,12 +179,30 @@ textarea{resize:vertical;min-height:100px}
 .topbar svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 @media (max-width:600px){.topbar-inner>span:first-child{display:none}}
 
+
+/* Deadline countdown bar */
+.deadlines{background:var(--tint);border-bottom:1px solid var(--line);padding:10px 0}
+.dl-inner{display:flex;align-items:center;gap:16px}
+.dl-head{display:flex;align-items:center;gap:8px;flex:0 0 auto}
+.dl-head svg{width:22px;height:22px;stroke:var(--brand-bright);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.dl-head h2{font-size:13px;font-weight:600;line-height:1.2}
+.dl-head p{font-size:11px;color:#6B7280;line-height:1.3}
+.dl-list{list-style:none;margin:0;padding:0;flex:1;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px}
+.dl{background:#fff;border:1px solid var(--line);border-radius:8px;padding:6px 10px;display:flex;flex-direction:column;line-height:1.3;min-width:0}
+.dl-name{font:600 11.5px var(--display);color:var(--brand);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dl-time{font:600 13px var(--body);color:var(--ink);font-variant-numeric:tabular-nums;white-space:nowrap}
+.dl-date{font-size:10.5px;color:#6B7280;white-space:nowrap}
+.dl.soon{border-color:#F5C2BD;background:#FFF6F5}
+.dl.soon .dl-time{color:#B42318}
+@media (max-width:1000px){.dl-inner{flex-direction:column;align-items:stretch;gap:8px}.dl-list{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:600px){.dl-head p{display:inline;margin-left:6px}.dl-head div{display:flex;align-items:baseline;flex-wrap:wrap}.dl-list{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:4px;-webkit-overflow-scrolling:touch}.dl{flex:0 0 138px;scroll-snap-align:start}}
+
 /* Hero slider */
 .hero{position:relative;background:#0A2350;color:#fff;padding:0;overflow:hidden}
 .slides{position:relative;min-height:clamp(380px,62vh,540px)}
 .slide{position:absolute;inset:0;opacity:0;visibility:hidden;transition:opacity .7s ease,visibility .7s}
 .slide.is-active{opacity:1;visibility:visible}
-.slide img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.slide img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 35%}
 .slide::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(8,30,72,.88) 0%,rgba(8,30,72,.62) 50%,rgba(8,30,72,.2) 100%)}
 .slide-copy{position:relative;z-index:1;height:100%;display:flex;flex-direction:column;justify-content:center;padding-top:48px;padding-bottom:72px;max-width:1140px}
 .slide-copy .label{color:#9CC3FF}
@@ -208,7 +226,7 @@ textarea{resize:vertical;min-height:100px}
 .intro{padding:0 0 56px;background:#fff}
 .intro-grid{display:grid;gap:20px;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));margin-top:-40px;position:relative;z-index:3}
 .intro-card{background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden;box-shadow:0 10px 28px rgba(11,61,145,.1);display:flex;flex-direction:column}
-.intro-card img{width:100%;aspect-ratio:350/204;object-fit:cover;background:var(--tint-2)}
+.intro-card img{width:100%;aspect-ratio:350/204;object-fit:cover;object-position:center 30%;background:var(--tint-2)}
 .intro-card div{padding:18px 20px 20px;display:flex;flex-direction:column;gap:8px;flex:1}
 .intro-card h2{font-size:17px}
 .intro-card p{font-size:14.5px;flex:1}
@@ -273,12 +291,53 @@ textarea{resize:vertical;min-height:100px}
   </div>
 </header>
 
+<section class="deadlines" aria-labelledby="dl-title">
+  <div class="wrap dl-inner">
+    <div class="dl-head">
+      <svg aria-hidden="true" viewBox="0 0 24 24"><rect x="3" y="4.5" width="18" height="16" rx="2"/><path d="M3 9.5h18M8 2.5v4M16 2.5v4"/></svg>
+      <div><h2 id="dl-title">Kenya filing deadlines</h2><p>Live countdown · EAT</p></div>
+    </div>
+    <ul class="dl-list">
+      <li class="dl" data-type="fixed" data-day="9">
+        <span class="dl-name">PAYE Filing</span>
+        <span class="dl-time">--</span>
+        <span class="dl-date">Due 9th</span>
+      </li>
+      <li class="dl" data-type="fixed" data-day="20">
+        <span class="dl-name">VAT Filing</span>
+        <span class="dl-time">--</span>
+        <span class="dl-date">Due 20th</span>
+      </li>
+      <li class="dl" data-type="fixed" data-day="9">
+        <span class="dl-name">NSSF Filing</span>
+        <span class="dl-time">--</span>
+        <span class="dl-date">Due 9th</span>
+      </li>
+      <li class="dl" data-type="fixed" data-day="9">
+        <span class="dl-name">SHIF Filing</span>
+        <span class="dl-time">--</span>
+        <span class="dl-date">Due 9th</span>
+      </li>
+      <li class="dl" data-type="working" data-day="9">
+        <span class="dl-name">Housing Levy Filing</span>
+        <span class="dl-time">--</span>
+        <span class="dl-date">Due 9th working day</span>
+      </li>
+      <li class="dl" data-type="fixed" data-day="9">
+        <span class="dl-name">NITA Filing</span>
+        <span class="dl-time">--</span>
+        <span class="dl-date">Due 9th</span>
+      </li>
+    </ul>
+  </div>
+</section>
+
 <main id="main">
 
 <section class="hero" id="top" aria-roledescription="carousel" aria-label="Highlights">
   <div class="slides">
       <div class="slide is-active" role="group" aria-roledescription="slide" aria-label="1 of 3">
-        <img src="https://images.pexels.com/photos/8190830/pexels-photo-8190830.jpeg?auto=compress&cs=tinysrgb&w=1800" alt="" fetchpriority="high">
+        <img src="https://images.pexels.com/photos/7793670/pexels-photo-7793670.jpeg?auto=compress&cs=tinysrgb&w=1800" alt="" fetchpriority="high">
         <div class="wrap slide-copy">
           <p class="label">Vision Preox International</p>
           <h1>Compliance handled. Clarity delivered.</h1>
@@ -290,7 +349,7 @@ textarea{resize:vertical;min-height:100px}
         </div>
       </div>
       <div class="slide" role="group" aria-roledescription="slide" aria-label="2 of 3" aria-hidden="true">
-        <img src="https://images.pexels.com/photos/7428850/pexels-photo-7428850.jpeg?auto=compress&cs=tinysrgb&w=1800" alt="" loading="lazy">
+        <img src="https://images.pexels.com/photos/7647995/pexels-photo-7647995.jpeg?auto=compress&cs=tinysrgb&w=1800" alt="" loading="lazy">
         <div class="wrap slide-copy">
           <p class="label">Vision Preox International</p>
           <h2>Your finance team, without the overhead.</h2>
@@ -302,7 +361,7 @@ textarea{resize:vertical;min-height:100px}
         </div>
       </div>
       <div class="slide" role="group" aria-roledescription="slide" aria-label="3 of 3" aria-hidden="true">
-        <img src="https://images.pexels.com/photos/7651930/pexels-photo-7651930.jpeg?auto=compress&cs=tinysrgb&w=1800" alt="" loading="lazy">
+        <img src="https://images.pexels.com/photos/29069344/pexels-photo-29069344.jpeg?auto=compress&cs=tinysrgb&w=1800" alt="" loading="lazy">
         <div class="wrap slide-copy">
           <p class="label">Vision Preox International</p>
           <h2>Every invoice KRA-ready.</h2>
@@ -324,15 +383,15 @@ textarea{resize:vertical;min-height:100px}
 <section class="intro" id="about-cards" aria-label="Introduction">
   <div class="wrap intro-grid">
     <article class="intro-card">
-      <img src="https://images.pexels.com/photos/1181317/pexels-photo-1181317.jpeg?auto=compress&cs=tinysrgb&w=700" alt="Professional working on a laptop in a modern office" width="700" height="408" loading="lazy">
+      <img src="https://images.pexels.com/photos/20209020/pexels-photo-20209020.jpeg?auto=compress&cs=tinysrgb&w=700" alt="Smiling African businesswoman working at her desk" width="700" height="408" loading="lazy">
       <div><h2>Who we are</h2><p>A regional firm of tax, accounting, payroll and business-process specialists serving clients across East Africa.</p><a href="#about">Read more</a></div>
     </article>
     <article class="intro-card">
-      <img src="https://images.pexels.com/photos/8190832/pexels-photo-8190832.jpeg?auto=compress&cs=tinysrgb&w=700" alt="Team discussing a project in a modern office" width="700" height="408" loading="lazy">
+      <img src="https://images.pexels.com/photos/7821936/pexels-photo-7821936.jpeg?auto=compress&cs=tinysrgb&w=700" alt="Smiling accountant in a blue suit reviewing documents at his desk" width="700" height="408" loading="lazy">
       <div><h2>What we do</h2><p>Accounting, tax, payroll, eTIMS integration, data analytics, consultancy, SOPs and training — individually or bundled.</p><a href="#services">Read more</a></div>
     </article>
     <article class="intro-card">
-      <img src="https://images.pexels.com/photos/9300913/pexels-photo-9300913.jpeg?auto=compress&cs=tinysrgb&w=700" alt="Consultant reviewing work on a laptop" width="700" height="408" loading="lazy">
+      <img src="https://images.pexels.com/photos/8068765/pexels-photo-8068765.jpeg?auto=compress&cs=tinysrgb&w=700" alt="Senior consultant in a suit holding a client folder" width="700" height="408" loading="lazy">
       <div><h2>How we do it</h2><p>We learn your business first, agree a fixed fee, then deliver on schedule with regular check-ins.</p><a href="#approach">Read more</a></div>
     </article>
   </div>
@@ -393,7 +452,7 @@ textarea{resize:vertical;min-height:100px}
 <section class="tint" id="why">
   <div class="wrap split">
     <div class="photo" style="aspect-ratio:4/3">
-      <img src="https://images.pexels.com/photos/8062306/pexels-photo-8062306.jpeg?auto=compress&cs=tinysrgb&w=1100" alt="Professionals collaborating in an office meeting" width="1100" height="825" loading="lazy">
+      <img src="https://images.pexels.com/photos/8123842/pexels-photo-8123842.jpeg?auto=compress&cs=tinysrgb&w=1100" alt="Colleagues discussing business reports during an office meeting" width="1100" height="825" loading="lazy">
     </div>
     <div>
       <p class="label">Why outsource to us</p>
@@ -592,6 +651,56 @@ textarea{resize:vertical;min-height:100px}
   // Careers: reveal openings message
   var ob=document.getElementById('openings-btn'), om=document.getElementById('openings-msg');
   ob.addEventListener('click',function(){var open=om.hidden;om.hidden=!open;ob.setAttribute('aria-expanded',open);});
+
+
+  // Statutory deadline countdowns (Kenya, East Africa Time = UTC+3)
+  (function(){
+    var EAT=3*3600e3;
+    function easter(y){var a=y%19,b=Math.floor(y/100),c=y%100,d=Math.floor(b/4),e=b%4,f=Math.floor((b+8)/25),g=Math.floor((b-f+1)/3),h=(19*a+b-d-g+15)%30,i=Math.floor(c/4),k=c%4,l=(32+2*e+2*i-h-k)%7,m=Math.floor((a+11*h+22*l)/451),mo=Math.floor((h+l-7*m+114)/31),da=((h+l-7*m+114)%31)+1;return Date.UTC(y,mo-1,da);}
+    var hcache={};
+    function holidays(y){
+      if(hcache[y])return hcache[y];
+      var set={}, day=864e5;
+      [[0,1],[4,1],[5,1],[9,10],[9,20],[11,12],[11,25],[11,26]].forEach(function(md){
+        var t=Date.UTC(y,md[0],md[1]); set[t]=1;
+        if(new Date(t).getUTCDay()===0) set[t+day]=1; // Sunday holiday observed Monday
+      });
+      var e=easter(y); set[e-2*day]=1; set[e+day]=1; // Good Friday, Easter Monday
+      return (hcache[y]=set);
+    }
+    function nthWorkingDay(y,m,n){
+      var h=holidays(y), d=0, count=0;
+      while(count<n){d++;var t=Date.UTC(y,m,d),wd=new Date(t).getUTCDay();if(wd!==0&&wd!==6&&!h[t])count++;}
+      return d;
+    }
+    function dueTs(type,day,y,m){
+      var dd=type==='working'?nthWorkingDay(y,m,day):day;
+      return {ts:Date.UTC(y,m,dd,20,59,59), y:y, m:m, d:dd}; // 23:59:59 EAT
+    }
+    function next(type,day,now){
+      var e=new Date(now+EAT), y=e.getUTCFullYear(), m=e.getUTCMonth();
+      var r=dueTs(type,day,y,m);
+      if(r.ts<now){m++; if(m>11){m=0;y++;} r=dueTs(type,day,y,m);}
+      return r;
+    }
+    var MON=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    var DOW=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+    function pad(n){return (n<10?'0':'')+n;}
+    var cells=[].slice.call(document.querySelectorAll('.dl'));
+    function tick(){
+      var now=Date.now();
+      cells.forEach(function(c){
+        var r=next(c.getAttribute('data-type'),parseInt(c.getAttribute('data-day'),10),now);
+        var left=Math.max(0,r.ts-now), s=Math.floor(left/1000);
+        var d=Math.floor(s/86400), h=Math.floor(s%86400/3600), mi=Math.floor(s%3600/60), se=s%60;
+        c.querySelector('.dl-time').textContent=d+'d '+pad(h)+'h '+pad(mi)+'m '+pad(se)+'s';
+        var wd=new Date(Date.UTC(r.y,r.m,r.d)).getUTCDay();
+        c.querySelector('.dl-date').textContent='Due '+DOW[wd]+' '+r.d+' '+MON[r.m];
+        c.classList.toggle('soon',d<3);
+      });
+    }
+    tick(); setInterval(tick,1000);
+  })();
 
   // Hero slider
   var slides=[].slice.call(document.querySelectorAll('.slide')), dots=[].slice.call(document.querySelectorAll('.dots button')), cur=0, timer;
